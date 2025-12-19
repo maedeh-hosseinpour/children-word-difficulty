@@ -542,8 +542,9 @@ categories.forEach((key) => {
       initializeResponse(currentIndex);
 
       if (currentIndex === words.length - 1) {
-        submitBtn.style.display = "inline-block";
-        nextBtn.style.display = "none";
+      submitBtn.textContent = "Finish the study";
+      submitBtn.style.display = "inline-block";
+      nextBtn.style.display = "none";
       } else {
         submitBtn.style.display = "none";
         nextBtn.style.display = "inline-block";
@@ -819,30 +820,27 @@ categories.forEach((key) => {
   }
 
   function submitResults() {
-    // Prevent multiple submissions
     if (hasSubmitted) {
       console.log("Submission already attempted, ignoring.");
       return;
     }
 
-    // Set submission flag
     hasSubmitted = true;
 
-    // Disable all interactive elements
     document.querySelectorAll(".rating-button").forEach(btn => {
       btn.disabled = true;
-      btn.onclick = null; // Remove click handlers
+      btn.onclick = null;
     });
     document.getElementById("next-btn").disabled = true;
-    document.getElementById("next-btn").onclick = null; // Remove click handler
+    document.getElementById("next-btn").onclick = null; 
     const submitBtn = document.getElementById("submit-btn");
     submitBtn.disabled = true;
-    submitBtn.onclick = null; // Remove click handler
-    document.getElementById("difficultyReason").disabled = true; // Disable textarea
+    submitBtn.onclick = null; 
+    document.getElementById("difficultyReason").disabled = true; 
     const letters = document.querySelectorAll("#word .letter");
     letters.forEach(span => {
       span.classList.remove("selectable", "clicked");
-      span.onclick = null; // Remove letter click handlers
+      span.onclick = null; 
     });
     const clearLink = document.getElementById("clear");
     if (clearLink) clearLink.onclick = null;
@@ -878,7 +876,6 @@ categories.forEach((key) => {
     const instruction = document.getElementById("rating-instruction");
     const explanationBox = document.getElementById("text-explanation");
 
-    // Ensure all interactive elements remain disabled
     document.getElementById("difficultyReason").disabled = true;
     document.querySelectorAll(".rating-button").forEach(btn => {
       btn.disabled = true;
@@ -917,9 +914,9 @@ categories.forEach((key) => {
     }
 
     wordBox.innerHTML = `<div class="analysis-box">${feedback}</div>`;
-    verificationText.innerHTML = `<br><a href="https://docs.google.com/forms/d/e/1FAIpQLSeCZUIvemRO_uF_VZgLdh0OlX41Qcrkse2fOaRug287hdyugQ/viewform?usp=dialog" target="_blank" class="clear-text">Go to Post-Survey</a>`;
     submitBtn.style.display = "none";
-    thankYouText.style.display = "none";
+    thankYouText.textContent = "Thank you for your participation.";
+    thankYouText.style.display = "block";
     instruction.style.display = "none";
     explanationBox.style.display = "none"; 
     document.getElementById("difficulty-question").style.display = "none";
@@ -930,7 +927,7 @@ categories.forEach((key) => {
     const key = event.key;
 
     if (hasSubmitted) {
-      event.preventDefault(); // Prevent all key actions after submission
+      event.preventDefault(); 
       return;
     }
 
